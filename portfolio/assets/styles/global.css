@@ -1,0 +1,87 @@
+/* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default (Light) Mode Styles */
+body {
+  --background-color: white;
+  --text-color: #222; /* Darker text for better contrast */
+  --link-color: #2962ff; /* Brighter blue for visibility */
+  --link-hover-color: #0047b3; /* Darker blue on hover */
+  --border-color: #d1d5db; /* Slightly darker border */
+  --card-background: #f9fafb; /* Off-white for cards */
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Subtle shadow */
+  --input-background: white;
+  --input-border: #d1d5db;
+  --input-focus: #93c5fd; /* Light blue focus ring */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  --background-color: #1f2937; /* Darker gray background */
+  --text-color: #f9fafb; /* Off-white text */
+  --link-color: #60a5fa; /* Light blue link */
+  --link-hover-color: #93c5fd; /* Lighter blue on hover */
+  --border-color: #4b5563; /* Darker border */
+  --card-background: #374151; /* Darker card background */
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  --input-background: #4b5563;
+  --input-border: #6b7280;
+  --input-focus: #93c5fd; /* Consistent focus ring */
+}
+
+/* Tailwind CSS Classes for Light Mode */
+.bg-light {
+  background-color: var(--background-color);
+}
+
+.text-light {
+  color: var(--text-color);
+}
+
+.link-light {
+  color: var(--link-color);
+}
+
+.link-light:hover {
+  color: var(--link-hover-color);
+}
+
+/* Tailwind CSS Classes for Dark Mode */
+.dark-mode .bg-dark {
+  background-color: var(--background-color);
+}
+
+.dark-mode .text-dark {
+  color: var(--text-color);
+}
+
+.dark-mode .link-dark {
+  color: var(--link-color);
+}
+
+.dark-mode .link-dark:hover {
+  color: var(--link-hover-color);
+}
+
+.skill-icon {
+    @apply w-16 h-16; /* Default size */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for scaling */
+}
+
+/* Hover effect */
+.skill-icon:hover {
+    @apply scale-110; /* Scale up on hover */
+}
+
+.timeline-bullet {
+    @apply w-4 h-4 rounded-full; /* Example size, adjust as needed */
+    transition: all 0.3s ease-in-out;
+}
+
+.timeline-bullet:hover {
+    transform: scale(1.1);
+}
+
+/* Add more custom styles as needed */
