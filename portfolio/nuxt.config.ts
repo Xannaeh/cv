@@ -1,9 +1,20 @@
-// nuxt.config.js
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@vue-email/nuxt',
+    ['@nuxtjs/i18n', {
+      locales: [
+        { code: 'en', language: 'en-US', file: 'en-US.json' },
+        { code: 'es', language: 'es-ES', file: 'es-ES.json' }
+      ],
+      defaultLocale: 'en',
+      strategy: 'prefix_except_default',
+      detectBrowserLanguage: false,
+      langDir: 'locales',
+      vueI18n: './i18n.config.ts',
+    }]
   ],
 
   css: ['~/assets/styles/global.css'],
@@ -12,13 +23,11 @@ export default defineNuxtConfig({
     { src: '~/plugins/gsap-plugin.js', mode: 'client' }
   ],
 
-  postcss: {
-    plugins: {
-      // Add your custom PostCSS plugins here
-      // 'postcss-nested': {}, 
-      // 'autoprefixer': {}
-    }
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => ['v-progress-circular'].includes(tag),
+    },
   },
 
-  compatibilityDate: '2025-01-03'
-})
+  compatibilityDate: '2025-01-04',
+});

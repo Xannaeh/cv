@@ -1,7 +1,6 @@
 <template>
 	<div :class="{ 'dark-mode': isDarkMode }" class="timeline-item mb-8 flex items-start"
-		:aria-label="`${type} ${title} at ${institution}`" tabindex="0">
-		<!-- Bullet Point and Line -->
+		:aria-label="`${type} ${getLocalizedTitle(title)} at ${getLocalizedInstitution(institution)}`" tabindex="0">
 		<div class="relative">
 			<div class="timeline-bullet bg-blue-500 dark:bg-blue-300"
 				:class="{ 'z-10': isExpanded, 'z-0': !isExpanded }"></div>
@@ -10,25 +9,25 @@
 			</div>
 		</div>
 
-		<!-- Content -->
 		<div class="ml-4 flex-1">
 			<div @click="toggleDetails" class="cursor-pointer select-none" :aria-expanded="isExpanded"
 				:aria-controls="`content-${id}`">
-				<h3 class="font-semibold text-lg text-light dark:text-dark">{{ title }}</h3>
-				<p class="text-gray-700 dark:text-gray-300">{{ institution }}</p>
+				<h3 class="font-semibold text-lg text-light dark:text-dark">{{ getLocalizedTitle(title) }}</h3>
+				<p class="text-gray-700 dark:text-gray-300">{{ getLocalizedInstitution(institution) }}</p>
 				<p class="text-sm text-gray-600 dark:text-gray-400">{{ formattedDate }}</p>
 			</div>
 			<div :id="`content-${id}`" v-show="isExpanded" class="mt-2" :aria-hidden="!isExpanded">
-				<p class="text-gray-800 dark:text-gray-200">{{ description }}</p>
+				<p class="text-gray-800 dark:text-gray-200">{{ getLocalizedDescription(description) }}</p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import expandSound from '~/assets/sounds/expand.mp3'; // Path to expand sound
-import closeSound from '~/assets/sounds/close.mp3'; // Path to close sound
+import { ref, computed, onMounted, nextTick, watch } from 'vue';
+import expandSound from '~/assets/sounds/expand.mp3';
+import closeSound from '~/assets/sounds/close.mp3';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
 	id: {
@@ -40,11 +39,11 @@ const props = defineProps({
 		default: 'job' // 'job' or 'education'
 	},
 	title: {
-		type: String,
+		type: Object, // Expects { en: "...", es: "..." }
 		required: true
 	},
 	institution: {
-		type: String,
+		type: Object, // Expects { en: "...", es: "..." }
 		required: true
 	},
 	startDate: {
@@ -56,8 +55,8 @@ const props = defineProps({
 		default: null
 	},
 	description: {
-		type: String,
-		default: ''
+		type: Object, // Expects { en: "...", es: "..." }
+		required: true
 	},
 	isDarkMode: {
 		type: Boolean,
@@ -70,8 +69,9 @@ const props = defineProps({
 });
 
 const isExpanded = ref(false);
-let expandAudio = null; // Declare outside
-let closeAudio = null; // Declare outside
+let expandAudio = null;
+let closeAudio = null;
+const { locale } = useI18n(); // Use i18n for translations
 
 const formattedDate = computed(() => {
 	const start = new Date(props.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
@@ -82,9 +82,9 @@ const formattedDate = computed(() => {
 const toggleDetails = () => {
 	isExpanded.value = !isExpanded.value;
 	if (isExpanded.value) {
-		if (expandAudio) expandAudio.play(); // Play expand sound with conditional check
+		if (expandAudio) expandAudio.play();
 	} else {
-		if (closeAudio) closeAudio.play(); // Play close sound with conditional check
+		if (closeAudio) closeAudio.play();
 	}
 };
 
@@ -93,20 +93,36 @@ const emit = defineEmits(['item-expanded']);
 watch(isExpanded, (newVal) => {
 	if (newVal) {
 		emit('item-expanded', props.id);
+		nextTick(() => { // Use nextTick here to wait for DOM updates
+			if (!props.lastItem) {
+				const element = document.querySelector(`#content-${props.id}`);
+				if (element) {
+					const height = element.offsetHeight;
+					const lineElement = document.querySelector(`.timeline-item:nth-child(${props.id}) .line`);
+					if (lineElement) {
+						lineElement.style.height = `${height}px`;
+					}
+				}
+			}
+		});
 	}
 });
 
 onMounted(() => {
-	expandAudio = new Audio(expandSound); // Initialize in onMounted
-	closeAudio = new Audio(closeSound); // Initialize in onMounted
-
-	// Ensure the line stretches to connect with the next item
-	if (!props.lastItem) {
-		const element = document.querySelector(`#content-${props.id}`);
-		if (element) {
-			const height = element.offsetHeight;
-			document.querySelector(`.timeline-item:nth-child(${props.id}) .line`).style.height = `${height}px`;
-		}
-	}
+	expandAudio = new Audio(expandSound);
+	closeAudio = new Audio(closeSound);
 });
+
+// Helper functions to get translations based on the current locale
+const getLocalizedTitle = (title) => {
+	return title[locale.value] || title['en']; // Fallback to English
+};
+
+const getLocalizedInstitution = (institution) => {
+	return institution[locale.value] || institution['en']; // Fallback to English
+};
+
+const getLocalizedDescription = (description) => {
+	return description[locale.value] || description['en']; // Fallback to English
+};
 </script>

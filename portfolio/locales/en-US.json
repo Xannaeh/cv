@@ -1,0 +1,53 @@
+{
+  "home": {
+    "intro": "Hi, I'm",
+    "title": "Python Software Developer",
+    "description": "Welcome to my portfolio! I'm a passionate software developer with expertise in Python, backend development, and creating engaging user experiences. Explore my projects and skills to learn more about my work.",
+    "quote1": "The only way to do great work is to love what you do.",
+    "quote2": "Every artist was first an amateur."
+  },
+  "about": {
+    "title": "About Me",
+    "description1": "I'm a dedicated Python Software Developer with a strong foundation in video game design and development. My journey in tech is driven by a passion for creating innovative and efficient solutions. With experience in developing microservices, APIs, and a keen interest in the intersection of gaming and software engineering, I strive to bring a unique perspective to every project.",
+    "description2": "My academic background in Video Game Design and Development has equipped me with a creative problem-solving approach, which I apply to develop user-friendly and engaging software applications. I am always eager to learn new technologies and methodologies to enhance my skills and contribute to impactful projects.",
+    "description3": "Outside of work, I enjoy exploring new trends in technology, playing video games, and contributing to open-source projects. I believe in continuous growth and collaboration, and I'm excited to connect with like-minded professionals and explore new opportunities."
+  },
+  "experience": {
+    "title": "Experience & Education",
+    "viewMore": "View More Experience"
+  },
+  "skills": {
+    "title": "Skills",
+    "viewMore": "View All Skills",
+    "showDetails":"Show Details",
+    "hideDetails":"Hide Details",
+    "seenAll":"Seen All Skills"
+  },
+  "projects": {
+    "title": "Projects",
+    "view": "View Projects",
+    "viewMore": "View All Projects",
+    "learnMore": "Learn More"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "getInTouch": "Get in Touch",
+    "otherWays": "Other ways to connect",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "name": "Name",
+    "enterName": "Enter your name",
+    "email": "Email",
+    "enterEmail": "Enter your email",
+    "message": "Message",
+    "enterMessage": "Enter your message",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "processing": "Processing...",
+    "success": "Message received! (Email not sent)",
+    "error": "Error submitting form. Please try again."
+  },
+  "footer": {
+    "copyright": "© 2024 Anabel Jesús Lorenzo. All rights reserved."
+  }
+}

@@ -3,42 +3,42 @@
 		class="bg-light dark:bg-dark p-6 rounded-lg shadow-md" tabindex="0">
 		<div class="mb-4">
 			<label for="name" class="block text-gray-700 dark:text-gray-300 mb-2"
-				:class="{ 'sr-only': !isLabelVisible }">Name:</label>
+				:class="{ 'sr-only': !isLabelVisible }">{{ $t('contact.name') }}:</label>
 			<input type="text" id="name" v-model="name" required
 				class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-500"
 				:class="{ 'dark-mode': isDarkMode, 'bg-gray-100 dark:bg-gray-900': !isDarkMode, 'bg-gray-800 dark:bg-gray-200': isDarkMode }"
 				:aria-required="true" :aria-labelledby="nameLabel" @keydown.tab.exact="onInputFocus('name')"
 				@keydown.shift.tab="onInputFocus('name')" />
-			<span id="nameLabel" class="sr-only">Enter your name</span>
+			<span id="nameLabel" class="sr-only">{{ $t('contact.enterName') }}</span>
 		</div>
 		<div class="mb-4">
 			<label for="email" class="block text-gray-700 dark:text-gray-300 mb-2"
-				:class="{ 'sr-only': !isLabelVisible }">Email:</label>
+				:class="{ 'sr-only': !isLabelVisible }">{{ $t('contact.email') }}:</label>
 			<input type="email" id="email" v-model="email" required
 				class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-500"
 				:class="{ 'dark-mode': isDarkMode, 'bg-gray-100 dark:bg-gray-900': !isDarkMode, 'bg-gray-800 dark:bg-gray-200': isDarkMode }"
 				:aria-required="true" :aria-labelledby="emailLabel" @keydown.tab.exact="onInputFocus('email')"
 				@keydown.shift.tab.exact="onInputFocus('email')" />
-			<span id="emailLabel" class="sr-only">Enter your email</span>
+			<span id="emailLabel" class="sr-only">{{ $t('contact.enterEmail') }}</span>
 		</div>
 		<div class="mb-4">
 			<label for="message" class="block text-gray-700 dark:text-gray-300 mb-2"
-				:class="{ 'sr-only': !isLabelVisible }">Message:</label>
+				:class="{ 'sr-only': !isLabelVisible }">{{ $t('contact.message') }}:</label>
 			<textarea id="message" v-model="message" required
 				class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-500"
 				:class="{ 'dark-mode': isDarkMode, 'bg-gray-100 dark:bg-gray-900': !isDarkMode, 'bg-gray-800 dark:bg-gray-200': isDarkMode }"
 				:aria-required="true" :aria-labelledby="messageLabel" @keydown.tab.exact="onInputFocus('message')"
 				@keydown.shift.tab.exact="onInputFocus('message')"></textarea>
-			<span id="messageLabel" class="sr-only">Enter your message</span>
+			<span id="messageLabel" class="sr-only">{{ $t('contact.enterMessage') }}</span>
 		</div>
 		<button type="submit"
 			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-			:aria-label="isSubmitting ? 'Submitting...' : 'Submit'" :disabled="isSubmitting">
-			{{ isSubmitting ? 'Processing...' : 'Submit' }}
+			:aria-label="isSubmitting ? $t('contact.submitting') : $t('contact.submit')" :disabled="isSubmitting">
+			{{ isSubmitting ? $t('contact.processing') : $t('contact.submit') }}
 		</button>
 		<div v-if="submitStatus" class="mt-4" :aria-live="assertive">
-			<p v-if="submitStatus === 'success'" class="text-green-500">Message received! (Email not sent)</p>
-			<p v-else-if="submitStatus === 'error'" class="text-red-500">Error submitting form. Please try again.</p>
+			<p v-if="submitStatus === 'success'" class="text-green-500">{{ $t('contact.success') }}</p>
+			<p v-else-if="submitStatus === 'error'" class="text-red-500">{{ $t('contact.error') }}</p>
 		</div>
 	</form>
 </template>
@@ -47,6 +47,7 @@
 import { ref, onMounted } from 'vue';
 // import emailjs from 'emailjs-com'; // Comment out or remove EmailJS import
 import sendSound from '~/assets/sounds/send.mp3';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
 	isDarkMode: {
@@ -62,6 +63,7 @@ const isSubmitting = ref(false);
 const submitStatus = ref(null); // 'success' | 'error' | null
 const isLabelVisible = ref(false);
 let sendAudio = null;
+const { t } = useI18n();
 
 onMounted(() => {
 	// emailjs.init(import.meta.env.VITE_EMAILJS_USER_ID); // Comment out or remove EmailJS initialization

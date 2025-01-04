@@ -2,19 +2,20 @@
 	<footer :class="{ 'dark-mode': isDarkMode }" class="footer bg-light dark:bg-dark py-6">
 		<div class="container mx-auto px-4 text-center">
 			<p class="text-sm text-gray-600 dark:text-gray-400" :aria-label="footerText">
-				© {{ currentYear }} Anabel Jesús Lorenzo. All rights reserved.
+				{{ $t('footer.copyright') }}
 			</p>
 			<div class="mt-2" aria-label="Contact Information">
 				<a href="mailto:anabeljesuslorenzo@example.com" class="text-blue-500 hover:underline"
-					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">Email</a>
-				|
+					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">{{
+						$t('contact.email') }}</a> |
 				<a href="https://linkedin.com/in/anabeljesuslorenzo" target="_blank" rel="noopener noreferrer"
 					class="text-blue-500 hover:underline"
-					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">LinkedIn</a>
-				|
+					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">{{
+						$t('contact.linkedin') }}</a> |
 				<a href="https://github.com/anabeljesuslorenzo" target="_blank" rel="noopener noreferrer"
 					class="text-blue-500 hover:underline"
-					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">GitHub</a>
+					:class="{ 'dark-mode': isDarkMode, 'text-blue-400': isDarkMode, 'hover:text-blue-600': isDarkMode }">{{
+						$t('contact.github') }}</a>
 			</div>
 		</div>
 	</footer>
@@ -22,6 +23,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
 	isDarkMode: {
@@ -30,8 +32,9 @@ const props = defineProps({
 	}
 });
 
+const { t } = useI18n();
 const currentYear = computed(() => new Date().getFullYear());
-const footerText = computed(() => `Copyright ${currentYear}, Anabel Jesús Lorenzo. All rights reserved.`);
+const footerText = computed(() => t('footer.copyright'));
 </script>
 
 <style scoped>

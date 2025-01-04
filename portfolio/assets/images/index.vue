@@ -43,7 +43,7 @@
 				</h2>
 				<div class="flex flex-wrap items-center">
 					<div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-						<img src="~/assets/images/anabel_profile_2.jpg" alt="Anabel Jesús Lorenzo"
+						<img src="~/assets/images/anabel_profile_2.png" alt="Anabel Jesús Lorenzo"
 							class="rounded-lg shadow-lg w-full" :class="{ 'dark-mode': isDarkMode }"
 							aria-label="Another picture of Anabel">
 					</div>

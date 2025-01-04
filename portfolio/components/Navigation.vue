@@ -6,26 +6,40 @@
 			<ul class="flex space-x-6">
 				<li>
 					<NuxtLink to="/about" class="link-light dark:link-dark" @click="handleLinkClick"
-						@keydown.enter="handleLinkClick" tabindex="0" aria-label="About">About</NuxtLink>
+						@keydown.enter="handleLinkClick" tabindex="0" aria-label="About">{{ $t('about.title') }}
+					</NuxtLink>
 				</li>
 				<li>
 					<NuxtLink to="/experience" class="link-light dark:link-dark" @click="handleLinkClick"
-						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Experience">Experience</NuxtLink>
+						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Experience">{{ $t('experience.title')
+						}}</NuxtLink>
 				</li>
 				<li>
 					<NuxtLink to="/skills" class="link-light dark:link-dark" @click="handleLinkClick"
-						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Skills">Skills</NuxtLink>
+						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Skills">{{ $t('skills.title') }}
+					</NuxtLink>
 				</li>
 				<li>
 					<NuxtLink to="/projects" class="link-light dark:link-dark" @click="handleLinkClick"
-						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Projects">Projects</NuxtLink>
+						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Projects">{{ $t('projects.title') }}
+					</NuxtLink>
 				</li>
 				<li>
 					<NuxtLink to="/contact" class="link-light dark:link-dark" @click="handleLinkClick"
-						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Contact">Contact</NuxtLink>
+						@keydown.enter="handleLinkClick" tabindex="0" aria-label="Contact">{{ $t('contact.title') }}
+					</NuxtLink>
 				</li>
 			</ul>
-			<ThemeToggle @toggle-theme="toggleTheme" :isDarkMode="isDarkMode" />
+			<div class="flex items-center space-x-4">
+				<!-- Language Switcher -->
+				<select @change="changeLanguage" v-model="selectedLocale"
+					class="bg-gray-400 p-2 rounded-lg focus:outline-none" aria-label="Select Language">
+					<option value="en">EN</option>
+					<option value="es">ES</option>
+				</select>
+
+				<ThemeToggle @toggle-theme="toggleTheme" :isDarkMode="isDarkMode" />
+			</div>
 		</div>
 	</nav>
 </template>
@@ -33,25 +47,26 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import ThemeToggle from '~/components/ThemeToggle.vue';
-import clickSound from '~/assets/sounds/click.mp3'; // Path to your click sound
+import clickSound from '~/assets/sounds/click.mp3';
+import { useI18n } from 'vue-i18n';
 
 const isDarkMode = ref(false);
-let audio = null; // Declare audio outside onMounted
+let audio = null;
+const { locale } = useI18n();
+const selectedLocale = ref(locale.value);
 
 const handleLinkClick = () => {
 	if (audio) {
-		audio.play(); // Play sound effect
+		audio.play();
 	}
 };
 
 onMounted(() => {
-	// Check for saved theme preference on load
 	const savedTheme = localStorage.getItem('theme');
 	isDarkMode.value = savedTheme === 'dark';
-	audio = new Audio(clickSound); // Initialize audio in onMounted
+	audio = new Audio(clickSound);
 });
 
-// Watch for changes in isDarkMode and update localStorage and body class
 watch(isDarkMode, (newVal) => {
 	localStorage.setItem('theme', newVal ? 'dark' : 'light');
 	if (newVal) {
@@ -63,5 +78,10 @@ watch(isDarkMode, (newVal) => {
 
 const toggleTheme = () => {
 	isDarkMode.value = !isDarkMode.value;
+};
+
+const changeLanguage = (event) => {
+	locale.value = event.target.value;
+	selectedLocale.value = event.target.value;
 };
 </script>

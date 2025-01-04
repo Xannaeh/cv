@@ -1,0 +1,53 @@
+{
+  "home": {
+    "intro": "Hola, soy",
+    "title": "Desarrolladora de Software Python",
+    "description": "¡Bienvenido a mi portafolio! Soy una apasionada desarrolladora de software con experiencia en Python, desarrollo backend y creación de experiencias de usuario atractivas. Explora mis proyectos y habilidades para conocer más sobre mi trabajo.",
+    "quote1": "La única forma de hacer un gran trabajo es amar lo que haces.",
+    "quote2": "Todo artista fue primero un amateur."
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "description1": "Soy una desarrolladora de software Python dedicada con una sólida formación en diseño y desarrollo de videojuegos. Mi viaje en la tecnología está impulsado por una pasión por crear soluciones innovadoras y eficientes. Con experiencia en el desarrollo de microservicios, APIs y un gran interés en la intersección de los juegos y la ingeniería de software, me esfuerzo por aportar una perspectiva única a cada proyecto.",
+    "description2": "Mi formación académica en Diseño y Desarrollo de Videojuegos me ha dotado de un enfoque creativo para la resolución de problemas, que aplico para desarrollar aplicaciones de software amigables y atractivas. Siempre estoy dispuesta a aprender nuevas tecnologías y metodologías para mejorar mis habilidades y contribuir a proyectos impactantes.",
+    "description3": "Fuera del trabajo, disfruto explorando nuevas tendencias en tecnología, jugando videojuegos y contribuyendo a proyectos de código abierto. Creo en el crecimiento continuo y la colaboración, y estoy emocionada de conectar con profesionales afines y explorar nuevas oportunidades."
+  },
+  "experience": {
+    "title": "Experiencia y Educación",
+    "viewMore": "Ver Más Experiencia"
+  },
+  "skills": {
+    "title": "Habilidades",
+    "viewMore": "Ver Todas las Habilidades",
+    "showDetails": "Mostrar Detalles",
+    "hideDetails": "Ocultar Detalles",
+    "seenAll": "Vistas Todas las Habilidades"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "view": "Ver Proyectos",
+    "viewMore": "Ver Todos los Proyectos",
+    "learnMore": "Saber Más"
+  },
+  "contact": {
+    "title": "Contáctame",
+    "getInTouch": "Ponte en Contacto",
+    "otherWays": "Otras formas de conectar",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "name": "Nombre",
+    "enterName": "Introduce tu nombre",
+    "email": "Correo Electrónico",
+    "enterEmail": "Introduce tu correo electrónico",
+    "message": "Mensaje",
+    "enterMessage": "Introduce tu mensaje",
+    "submit": "Enviar",
+    "submitting": "Enviando...",
+    "processing": "Procesando...",
+    "success": "¡Mensaje recibido! (Correo electrónico no enviado)",
+    "error": "Error al enviar el formulario. Por favor, inténtalo de nuevo."
+  },
+  "footer": {
+    "copyright": "© 2024 Anabel Jesús Lorenzo. Todos los derechos reservados."
+  }
+}

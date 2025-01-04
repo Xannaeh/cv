@@ -2,8 +2,8 @@
 	<div :class="{ 'dark-mode': isDarkMode }">
 		<section class="experience py-16 px-4">
 			<div class="container mx-auto">
-				<h2 class="section-title text-3xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200">
-					Experience & Education</h2>
+				<h2 class="section-title text-3xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200">{{
+					$t('experience.title') }}</h2>
 				<div class="timeline relative">
 					<div v-for="(item, index) in sortedExperience" :key="index">
 						<TimelineItem :id="index + 1" :type="item.type" :title="item.title"
@@ -21,8 +21,10 @@
 import { ref, computed, onMounted, inject } from 'vue';
 import TimelineItem from '~/components/TimelineItem.vue';
 import experienceData from '~/data/experienceData';
+import { useI18n } from 'vue-i18n';
 
 const isDarkMode = inject('isDarkMode');
+const { t, locale } = useI18n();
 
 const sortedExperience = computed(() => {
 	return [...experienceData].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
